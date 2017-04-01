@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php
 	// include function & css
+	//coba push pertama
 	include_once("_function_i/cConnect.php");
 	include_once("_function_i/cview.php");
 	include_once("_function_i/inc_f_object.php");
@@ -11,10 +12,10 @@
 	// connection
 	$conn = new cConnect();
 	$conn->goConnect();
-	?> 
-<?php 
+	?>
+<?php
 	// variable default
-	// 
+	//
 	if (empty($okein)) {
 		$okein=9;
 	} else {
@@ -63,19 +64,19 @@
 			$okein=1;
 
 			// cek uname & pword
-			
+
 			if ($okein==1)  {
 				$sqlunpw = "select a.* from user_system a where a.email='".$cekemail."' and a.password='".$_POST["pword"]."'";
 				echo $sqlunpw;
 
 				$view = new cView();
 				$arrayunpw = $view->vViewData($sqlunpw);
-				foreach ($arrayunpw as $dataunpw){	
-						
+				foreach ($arrayunpw as $dataunpw){
+
 					$_SESSION["user_id"] = $dataunpw["user_id"];
 					$_SESSION["nama"] = $dataunpw["nama"];
 				}
-				
+
 					if (!empty($dataunpw["nik"])) {
 						$login=1;
 						$okein=1;
@@ -97,7 +98,7 @@
 				$_SESSION["session_id"] = "peterpan";
 				$_SESSION["role"] = "1";
 
-				foreach($arrayuserrole as $datauserrole) 
+				foreach($arrayuserrole as $datauserrole)
 				{
 					$_SESSION["session_id"]=$datauserrole["session_id"];
 					$_SESSION["role"]=$datauserrole["role"];
@@ -113,9 +114,9 @@
 					}
 
 
-				
+
 			//
-			}  else { 
+			}  else {
 				$login=0;
 				$okein=0;
 				$cekunamepword=0;
@@ -143,7 +144,7 @@
 								  <span class="sr-only">Error:</span>Username/Password salah
 								</div>
 								<?php
-							} else { 
+							} else {
 								echo "";
 							}
 						?>
@@ -174,7 +175,7 @@
             <!-- Login Ends Here -->
         </div>
 		<div>
-			
+
 		</div>
     </div>
 	<!-- start here -->
@@ -183,10 +184,10 @@
 		//echo $dataunpw["nik"]."-".$dataunpw["nama_karyawan"]." ".$dataunpw["unit_base"];
 		if ($_SESSION["role"]==1) {
 			header('Location: user/');
-		} 
+		}
 		if ($_SESSION["role"]==9) {
 			header('Location: admin/');
-		} 
+		}
 	} else {
 		session_destroy();
 	}
